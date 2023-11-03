@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "637914694592",
+    "project_id": "hamt-car-booking-app",
+    "storage_bucket": "hamt-car-booking-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637914694592:android:42ceaa1808638257293e25",
+        "android_client_info": {
+          "package_name": "com.example.xmt_car_booking_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcAN3essEALKBFMevJErqeHKR8KVN0o4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
