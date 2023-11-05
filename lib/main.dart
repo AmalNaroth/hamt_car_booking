@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xmt_car_booking_app/repo/firebase_options.dart';
 import 'package:xmt_car_booking_app/view_models/administrator/administator_home_viewmodel.dart';
+import 'package:xmt_car_booking_app/view_models/administrator/administator_send_driver_request.dart';
+import 'package:xmt_car_booking_app/view_models/administrator/administrator_tripdetails_viewmodels.dart';
 import 'package:xmt_car_booking_app/view_models/administrator/bottomnav_bar_viewmodels_administrator.dart';
 import 'package:xmt_car_booking_app/view_models/authentication/login_screen_view_model.dart';
 import 'package:xmt_car_booking_app/view_models/authentication/sing_up_view_model.dart';
+import 'package:xmt_car_booking_app/view_models/driver/driver_home_screen_view_models.dart';
 import 'package:xmt_car_booking_app/view_models/employees/employee_activity_view_models.dart';
 import 'package:xmt_car_booking_app/view_models/employees/employee_services_view_models.dart';
 import 'package:xmt_car_booking_app/view_models/splash_screen_view_models.dart';
@@ -51,6 +54,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AdministatorHomeViewModel(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => AdministratorTripDetailsViewModels(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AdministratorSendSendDriverRequest(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DriverHomeScreenViewModels(),
+        )
       ],
       child: MaterialApp(
         title: "Car booking app",

@@ -13,7 +13,8 @@ class EmployeesServicesScreen extends StatelessWidget {
   EmployeesServicesScreen({super.key});
 
   final TextEditingController _employeeNameController = TextEditingController();
-  final TextEditingController _locationController = TextEditingController();
+  final TextEditingController _pickupController = TextEditingController();
+  final TextEditingController _destinationController = TextEditingController();
 
   String selectDriveServices = "";
   String selectCarType = "";
@@ -53,10 +54,23 @@ class EmployeesServicesScreen extends StatelessWidget {
                       icon: Icons.person,
                       hinttext: "Employee name"),
                   fHight20,
-                  TextFormFieldWidget(
-                      controller: _locationController,
-                      icon: Icons.location_city,
-                      hinttext: "Location"),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormFieldWidget(
+                            controller: _pickupController,
+                            icon: Icons.location_city,
+                            hinttext: "Enter pick-up location"),
+                      ),
+                      fWidth20,
+                      Expanded(
+                        child: TextFormFieldWidget(
+                            controller: _destinationController,
+                            icon: Icons.car_repair,
+                            hinttext: "Where to?",),
+                      )
+                    ],
+                  ),
                   fHight20,
                   Row(
                     children: [
@@ -123,8 +137,8 @@ class EmployeesServicesScreen extends StatelessWidget {
                   ),
                   fHight20,
                   DropdownButtonFormField(
-                    hint: Text("Select your car"),
-                    decoration: InputDecoration(
+                    hint:const Text("Select your car"),
+                    decoration:const InputDecoration(
                       border: OutlineInputBorder(),
                     ),
                     items: cartype
@@ -142,23 +156,28 @@ class EmployeesServicesScreen extends StatelessWidget {
                     onPressed: () async {
                       final employeesIntance = EmployeesModel(
                           name: _employeeNameController.text,
-                          location: _locationController.text,
                           date: DateFormat.yMMMd()
                               .format(employeeServiceProvier.getSelectedDate!)
                               .toString(),
                           time: employeeServiceProvier.getSelectTime!
                               .format(context),
                           driverService: selectDriveServices,
-                          carType: selectCarType);
+                          carType: selectCarType,
+                          destination: _destinationController.text,
+                          pickpoint: _pickupController.text);
                       await employeeServiceProvier
-                          .addtoFirebase(employeesIntance).then((value) {
-                            showDialog(context: context, builder: (context) {
-                              return SimpleDialog(
-                                title: Text("Submited"),
-                                children: [],
-                              );
-                            },);
-                          });
+                          .addtoFirebase(employeesIntance)
+                          .then((value) {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return SimpleDialog(
+                              title: Text("Submited"),
+                              children: [],
+                            );
+                          },
+                        );
+                      });
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:xmt_car_booking_app/utils/size_constants.dart';
+import 'package:xmt_car_booking_app/views/administrator/administator_allocate_driver_screen.dart';
 
 class AdministratorDriverCheckScreen extends StatefulWidget {
   const AdministratorDriverCheckScreen({Key? key}) : super(key: key);
@@ -27,17 +28,33 @@ class _AdministratorDriverCheckScreenState
                 return Card(
                   child: ListTile(
                     onTap: () {
-                      
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              AdministratorAllocateDriver(driverDetails: doc),
+                        ),
+                      );
                     },
                     leading: CircleAvatar(
                       backgroundImage: NetworkImage(doc['profileImage']),
                     ),
                     title: Text(doc["name"] as String),
-                    trailing: CircleAvatar(
-                        radius: 5,
-                        backgroundColor: doc['status'] == "true"
-                            ? Colors.red
-                            : Colors.green),
+                    trailing: doc['status'] == "true"
+                        ? Card(
+                            child: Container(
+                              color: const Color.fromARGB(255, 126, 230, 129),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text("Approved"),
+                              ),
+                            ),
+                          )
+                        : CircleAvatar(
+                            radius: 5,
+                            backgroundColor: doc['status'] == "true"
+                                ? Colors.red
+                                : Colors.green,
+                          ),
                   ),
                 );
               },
